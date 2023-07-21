@@ -2,6 +2,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import './globals.css';
 import { cookies } from 'next/headers';
 import { Noto_Sans } from 'next/font/google';
+import NavBar from '@/components/NavBar';
 
 export const metadata = {
 	title: 'Thullo',
@@ -30,7 +31,11 @@ export default async function RootLayout({
 				<link rel="icon" href="/favicon.ico" />
 			</head>
 			<body>
-				<header>{/* {user && <Navbar />} */}</header>
+				{user && (
+					<header>
+						<NavBar />
+					</header>
+				)}
 				<main className="container">{children}</main>
 			</body>
 		</html>
