@@ -10,7 +10,7 @@ export const metadata = {
 
 const notoSans = Noto_Sans({
 	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  subsets: ['latin']
+	subsets: ['latin'],
 });
 
 export default async function RootLayout({
@@ -30,10 +30,8 @@ export default async function RootLayout({
 				<link rel="icon" href="/favicon.ico" />
 			</head>
 			<body>
-				<main className="container">
-					{/* {user && <Navbar />} */}
-					{children}
-				</main>
+				<header>{/* {user && <Navbar />} */}</header>
+				<main className="container">{children}</main>
 			</body>
 		</html>
 	);

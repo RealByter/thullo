@@ -1,11 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Provider } from '@supabase/supabase-js';
-import ThulloLogo from '@/app/Logo.svg';
 import Logo from '@/components/svg/Logo';
-import { useRouter } from 'next/router';
 
 export default function LoginPanel() {
 	const supabase = createClientComponentClient();
@@ -23,7 +20,7 @@ export default function LoginPanel() {
 		<div className="h-screen w-screen flex items-center justify-center">
 			<div className="border border-1 border-[#c3c3c3] p-10 sm:p-14 rounded-3xl flex flex-col mx-8 max-w-[474px] gap-8">
 				<Logo className="mx-auto" />
-				<div className='flex flex-col gap-4'>
+				<div className="flex flex-col gap-4">
 					<h1 className="font-semibold text-lg">
 						Take your next project to the moon 🚀
 					</h1>
