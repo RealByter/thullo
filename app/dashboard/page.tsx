@@ -12,5 +12,26 @@ export default async function Index() {
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/login");
-  else redirect("/dashboard");
+
+  const { data, error } = await supabase
+    .from("users")
+    .select("id, boards (id, name, photo, users (avatar_url))")
+    .eq("id", user.id)
+    .single();
+
+  if (error) throw error;
+
+  return (
+    <>
+      {data?.boards.map((board) => (
+        <BoardLink
+          key={board.id}
+          id={board.id}
+          photo={board.photo}
+          usersAvatars={board.users.map((value) => value.avatar_url)}
+          name={board.name}
+        />
+      ))}
+    </>
+  );
 }
