@@ -41,13 +41,13 @@ export default function LogoutDropdown({
         </Menu.Button>
         <Menu.Items className="absolute right-0 top-12 flex w-40 flex-col gap-2 rounded-xl border bg-white p-2 shadow-[0_2px_4px_#0000000d] outline-none">
           <Menu.Item>
-            <MenuButton onClick={() => {}}>
+            <MenuButton>
               <MdAccountCircle className="h-6 w-6" /> My Profile
             </MenuButton>
           </Menu.Item>
           <div className="w-full border-t" />
           <Menu.Item>
-            <MenuButton red onClick={signOut}>
+            <MenuButton red={true} onClick={signOut}>
               <MdLogout className="h-6 w-6" /> Logout
             </MenuButton>
           </Menu.Item>
@@ -57,12 +57,12 @@ export default function LogoutDropdown({
   );
 }
 
-function MenuButton(
+const MenuButton = (
   props: DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
-  > & { red?: boolean | undefined; onClick: () => void },
-) {
+  > & { red?: boolean | undefined; },
+) => {
   const colorClasses = props.red
     ? "text-red-500 hover:bg-red-100 ui-active:bg-red-100"
     : "text-gray-600 hover:bg-gray-100 ui-active:bg-gray-100";
