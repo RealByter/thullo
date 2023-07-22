@@ -1,3 +1,4 @@
+import BoardLink from "@/components/BoardLink";
 import Button from "@/components/Button";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
@@ -25,10 +26,62 @@ export default async function Index() {
   }
 
   return (
-    <div>
+    <div className="mx-auto max-w-6xl p-8">
       <div className="flex justify-between">
         <h1 className="text-lg font-medium">All Boards</h1>
         <Button>+ Add Board</Button>
+      </div>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-4 mt-10">
+        {data ? (
+          <BoardLink
+            id={data.boards[0].id}
+            photo={data.boards[0].photo}
+            usersAvatars={data.boards[0].users.map((value) => value.avatar_url)}
+            name={data.boards[0].name}
+          />
+        ) : (
+          <div>skeleton</div>
+        )}
+        {data ? (
+          <BoardLink
+            id={data.boards[0].id}
+            photo={data.boards[0].photo}
+            usersAvatars={data.boards[0].users.map((value) => value.avatar_url)}
+            name={data.boards[0].name}
+          />
+        ) : (
+          <div>skeleton</div>
+        )}
+        {data ? (
+          <BoardLink
+            id={data.boards[0].id}
+            photo={data.boards[0].photo}
+            usersAvatars={data.boards[0].users.map((value) => value.avatar_url)}
+            name={data.boards[0].name}
+          />
+        ) : (
+          <div>skeleton</div>
+        )}
+        {data ? (
+          <BoardLink
+            id={data.boards[0].id}
+            photo={data.boards[0].photo}
+            usersAvatars={data.boards[0].users.map((value) => value.avatar_url)}
+            name={data.boards[0].name}
+          />
+        ) : (
+          <div>skeleton</div>
+        )}
+        {data ? (
+          <BoardLink
+            id={data.boards[0].id}
+            photo={data.boards[0].photo}
+            usersAvatars={data.boards[0].users.map((value) => value.avatar_url)}
+            name={data.boards[0].name}
+          />
+        ) : (
+          <div>skeleton</div>
+        )}
       </div>
     </div>
   );

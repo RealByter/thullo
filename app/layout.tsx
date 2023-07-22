@@ -36,7 +36,7 @@ export default async function RootLayout({
 						<NavBar />
 					</header>
 				)}
-				<main className="container mx-auto mt-10">{children}</main>
+				<main className="mx-auto mt-10">{children}</main>
 			</body>
 		</html>
 	);
