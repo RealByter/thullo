@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 type BoardLinkProps = {
   id: string;
@@ -16,7 +18,7 @@ export default function BoardLink({
   usersAvatars,
   id,
 }: BoardLinkProps) {
-  const others = usersAvatars.length - 3
+  const others = usersAvatars.length - 3;
 
   return (
     <Link
@@ -28,8 +30,8 @@ export default function BoardLink({
       </div>
       <h2 className="mt-3 font-medium">{name}</h2>
       <div className="mt-5 flex items-center gap-3">
-        {usersAvatars.slice(0, 3).map((avatar) => (
-          <div className="overflow-hidden rounded-lg">
+        {usersAvatars.slice(0, 3).map((avatar, index) => (
+          <div className="overflow-hidden rounded-lg" key={index}>
             <Image width={28} height={28} src={avatar} alt="" />
           </div>
         ))}
@@ -40,5 +42,31 @@ export default function BoardLink({
         )}
       </div>
     </Link>
+  );
+}
+
+export function SkeletonBoardLink() {
+  return (
+    <SkeletonTheme baseColor="#eee" highlightColor="#ddd">
+      <div className="flex h-64 flex-col rounded-xl bg-white p-3 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.05)]">
+        <div className="relative h-36 w-full overflow-hidden rounded-xl">
+          <Skeleton className="h-full"  />
+        </div>
+        <h2 className="mt-3 font-medium">
+          <Skeleton />
+        </h2>
+        <div className="mt-5 flex items-center gap-3">
+          <div className="overflow-hidden rounded-lg">
+            <Skeleton height={28} width={28} />
+          </div>
+          <div className="overflow-hidden rounded-lg">
+            <Skeleton height={28} width={28} />
+          </div>
+          <div className="overflow-hidden rounded-lg">
+            <Skeleton height={28} width={28} />
+          </div>
+        </div>
+      </div>
+    </SkeletonTheme>
   );
 }
