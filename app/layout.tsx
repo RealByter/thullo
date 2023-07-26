@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { Noto_Sans } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import { SkeletonTheme } from "react-loading-skeleton";
+import ReactQueryProvider from "./ReactQueryProvider";
 
 export const metadata = {
   title: "Thullo",
@@ -32,14 +33,16 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <SkeletonTheme baseColor="#eee" highlightColor="#ddd">
-          {user && (
-            <header>
-              <NavBar />
-            </header>
-          )}
-          <main className="mx-auto mt-10">{children}</main>
-        </SkeletonTheme>
+        <ReactQueryProvider>
+          <SkeletonTheme baseColor="#eee" highlightColor="#ddd">
+            {user && (
+              <header>
+                <NavBar />
+              </header>
+            )}
+            <main className="mx-auto mt-10">{children}</main>
+          </SkeletonTheme>
+        </ReactQueryProvider>
       </body>
     </html>
   );
