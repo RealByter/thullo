@@ -21,10 +21,10 @@ export default function CreateBoard() {
       >
         <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
-        <div className="fixed inset-0 flex items-center justify-center p-4">
+        <div className="fixed inset-0 flex items-start justify-center p-4">
           <Dialog.Panel
             as="div"
-            className="mx-auto max-w-xs rounded-lg bg-white p-6 shadow-main"
+            className="mx-auto max-w-xs rounded-lg bg-white p-6 shadow-main mt-20"
           >
             <div className="relative h-[100px] w-[260px] overflow-hidden rounded-lg">
               <Image
