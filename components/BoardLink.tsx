@@ -47,26 +47,24 @@ export default function BoardLink({
 
 export function SkeletonBoardLink() {
   return (
-    <SkeletonTheme baseColor="#eee" highlightColor="#ddd">
-      <div className="flex h-60 flex-col rounded-xl bg-white p-3 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.05)]">
-        <div className="relative h-36 w-full overflow-hidden rounded-xl">
-          <Skeleton className="h-full"  />
+    <div className="flex h-60 flex-col rounded-xl bg-white p-3 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.05)]">
+      <div className="relative h-36 w-full overflow-hidden rounded-xl">
+        <Skeleton className="h-full" />
+      </div>
+      <h2 className="mt-2 font-medium">
+        <Skeleton />
+      </h2>
+      <div className="mt-2 flex items-center gap-3">
+        <div className="overflow-hidden rounded-lg">
+          <Skeleton height={28} width={28} />
         </div>
-        <h2 className="mt-2 font-medium">
-          <Skeleton />
-        </h2>
-        <div className="mt-2 flex items-center gap-3">
-          <div className="overflow-hidden rounded-lg">
-            <Skeleton height={28} width={28} />
-          </div>
-          <div className="overflow-hidden rounded-lg">
-            <Skeleton height={28} width={28} />
-          </div>
-          <div className="overflow-hidden rounded-lg">
-            <Skeleton height={28} width={28} />
-          </div>
+        <div className="overflow-hidden rounded-lg">
+          <Skeleton height={28} width={28} />
+        </div>
+        <div className="overflow-hidden rounded-lg">
+          <Skeleton height={28} width={28} />
         </div>
       </div>
-    </SkeletonTheme>
+    </div>
   );
 }
