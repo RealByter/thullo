@@ -39,7 +39,7 @@ export default function LogoutDropdown({
           </span>
           <MdArrowDropDown className="h-6 w-6" />
         </Menu.Button>
-        <Menu.Items className="absolute right-0 top-12 flex w-40 flex-col gap-2 rounded-xl border bg-white p-2 shadow-[0_2px_4px_#0000000d] outline-none">
+        <Menu.Items className="absolute right-0 top-12 flex w-40 flex-col gap-2 rounded-xl border bg-white p-2 shadow-main outline-none">
           <Menu.Item>
             <MenuButton>
               <MdAccountCircle className="h-6 w-6" /> My Profile

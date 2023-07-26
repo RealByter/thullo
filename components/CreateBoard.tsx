@@ -24,7 +24,7 @@ export default function CreateBoard() {
         <div className="fixed inset-0 flex items-center justify-center p-4">
           <Dialog.Panel
             as="div"
-            className="mx-auto max-w-xs rounded-lg bg-white p-6 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.05)]"
+            className="mx-auto max-w-xs rounded-lg bg-white p-6 shadow-main"
           >
             <div className="relative h-[100px] w-[260px] overflow-hidden rounded-lg">
               <Image

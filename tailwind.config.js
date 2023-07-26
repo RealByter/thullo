@@ -5,7 +5,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        'main': '0px 2px 4px rgba(0, 0, 0, 0.05)'
+      }
+    },
   },
   plugins: [require("@headlessui/tailwindcss")({ prefix: "ui" })],
 };
