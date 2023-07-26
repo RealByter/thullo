@@ -10,7 +10,7 @@ export default function SearchInput({ search }: SearchInputProps) {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       search(query);
-    }, 3000);
+    }, 1500);
     return () => clearTimeout(timeoutId);
   }, [query]);
 
