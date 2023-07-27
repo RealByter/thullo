@@ -8,7 +8,7 @@ import getPhotos from "./serverActions/getPhotos";
 import Image from "next/image";
 
 type ImageSearchProps = {
-  setImage: () => void;
+  setImage: (url: string) => void;
 };
 
 export default function ImageSearch({ setImage }: ImageSearchProps) {
@@ -20,22 +20,16 @@ export default function ImageSearch({ setImage }: ImageSearchProps) {
   const skeletons: number[] = new Array(12);
   skeletons.fill(0);
 
-  function Wrapper({ children }: { children: React.ReactNode }) {
-    return (
-      <div className="relative h-[50px] w-[50px] overflow-hidden rounded-[4px]">
-        {children}
-      </div>
-    );
-  }
+  const wrapperClasses = "relative h-[50px] w-[50px] overflow-hidden rounded-[4px]"
 
   let images: any = [];
   if (status === "loading") {
     images = (
       <div className="mt-5 grid auto-rows-[50px] grid-cols-[repeat(4,50px)] gap-2">
         {skeletons.map((num, index) => (
-          <Wrapper key={index}>
+          <div key={index} className={wrapperClasses}>
             <Skeleton className="h-full w-full" />
-          </Wrapper>
+          </div>
         ))}
       </div>
     );
@@ -44,9 +38,9 @@ export default function ImageSearch({ setImage }: ImageSearchProps) {
       images = (
         <div className="mt-5 grid auto-rows-[50px] grid-cols-[repeat(4,50px)] gap-2">
           {data.map((image: any) => (
-            <Wrapper key={image.id}>
+            <button onClick={() => setImage(image.urls.regular)} key={image.id} className={`${wrapperClasses} relative after:w-full after:h-full after:absolute after:top-0 after:left-0 hover:after:bg-white/50 focus-visible:after:bg-white/50`}>
               <Image fill objectFit="cover" src={image.urls.small} alt="" />
-            </Wrapper>
+            </button>
           ))}
         </div>
       );
