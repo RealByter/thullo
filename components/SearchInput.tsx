@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Input from "./Input";
 
 type SearchInputProps = {
   search: (input: string) => void;
@@ -15,10 +16,9 @@ export default function SearchInput({ search }: SearchInputProps) {
   }, [query]);
 
   return (
-    <input
+    <Input
       value={query}
       onChange={(e) => setQuery(e.target.value)}
-      className="rounded-lg bg-white p-3 text-xs font-medium shadow-main outline-none placeholder:text-[#BDBDBD]"
       placeholder="Keywords..."
     />
   );
