@@ -8,7 +8,14 @@ import { LuGlobe2, LuLock } from "react-icons/lu";
 import ImageSearch from "./ImageSearch";
 import Input from "../Input";
 import IconButton from "../IconButton";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import {
+  createClientComponentClient,
+  createServerActionClient,
+} from "@supabase/auth-helpers-nextjs";
+import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+import { Database } from "../../types/supabase";
+import createBoard from "../serverActions/createBoard";
 
 const defaultCover =
   "https://images.unsplash.com/photo-1588421357574-87938a86fa28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
@@ -18,7 +25,7 @@ export default function CreateBoard() {
   const [visibility, setVisibility] = useState<"public" | "private">("public");
   const [title, setTitle] = useState("");
   const [cover, setCover] = useState(defaultCover);
-  const supabase = createClientComponentClient();
+  const [creating, setCreating] = useState(false);
 
   function resetInputs() {
     setTitle("");
@@ -27,21 +34,10 @@ export default function CreateBoard() {
     setIsOpen(false);
   }
 
-  async function createBoard() {
-    const { error: bError, data } = await supabase
-      .from("boards")
-      .insert({ cover, title, visibility })
-      .select("id");
-    if (bError) throw bError;
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    const { error: mError } = await supabase
-      .from("members")
-      .insert({ user_id: user?.id, board_id: data[0].id });
-    if (mError) throw mError;
+  async function createBoardHandler() {
+    setCreating(true);
+    await createBoard({ cover, visibility, title });
+    setCreating(false);
 
     resetInputs();
   }
@@ -91,10 +87,10 @@ export default function CreateBoard() {
               </Button>
               <Button
                 variant="blue"
-                disabled={title.length === 0}
-                onClick={createBoard}
+                disabled={title.length === 0 || creating}
+                onClick={createBoardHandler}
               >
-                + Create
+                {creating ? "+ Creating..." : "+ Create"}
               </Button>
             </div>
           </Dialog.Panel>
@@ -102,4 +98,11 @@ export default function CreateBoard() {
       </Dialog>
     </>
   );
+}
+function createBoardAction(arg0: {
+  cover: string;
+  visibility: "public" | "private";
+  title: string;
+}) {
+  throw new Error("Function not implemented.");
 }
