@@ -1,10 +1,10 @@
 import { MdImage } from "react-icons/md";
-import Popover from "./Popover";
-import SearchInput from "./SearchInput";
+import Popover from "../Popover";
+import SearchInput from "../SearchInput";
 import Skeleton from "react-loading-skeleton";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import getPhotos from "./serverActions/getPhotos";
+import getPhotos from "../serverActions/getPhotos";
 import Image from "next/image";
 
 type ImageSearchProps = {

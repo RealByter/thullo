@@ -7,13 +7,13 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 type BoardLinkProps = {
   id: string;
-  photo: string;
+  cover: string;
   name: string;
   usersAvatars: string[];
 };
 
 export default function BoardLink({
-  photo,
+  cover,
   name,
   usersAvatars,
   id,
@@ -26,7 +26,7 @@ export default function BoardLink({
       className="flex h-60 flex-col rounded-xl bg-white p-3 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.05)]"
     >
       <div className="relative h-36 w-full overflow-hidden rounded-xl">
-        <Image src={photo} alt="Board Photo" fill objectFit="cover" />
+        <Image src={cover} alt="Board cover" fill objectFit="cover" />
       </div>
       <h2 className="mt-2 font-medium">{name}</h2>
       <div className="mt-2 flex items-center gap-3">

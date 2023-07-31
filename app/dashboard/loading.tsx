@@ -1,4 +1,4 @@
-import { SkeletonBoardLink } from "@/components/BoardLink";
+import { SkeletonBoardLink } from "@/components/dashboard/BoardLink";
 
 export default function Loading() {
   return (

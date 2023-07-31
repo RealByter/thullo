@@ -1,5 +1,4 @@
-import BoardLink, { SkeletonBoardLink } from "@/components/BoardLink";
-import Button from "@/components/Button";
+import BoardLink from "@/components/dashboard/BoardLink";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -15,7 +14,7 @@ export default async function Index() {
 
   const { data, error } = await supabase
     .from("users")
-    .select("id, boards (id, name, photo, users (avatar_url))")
+    .select("id, boards (id, title, cover, users (avatar_url))")
     .eq("id", user.id)
     .single();
 
@@ -27,9 +26,9 @@ export default async function Index() {
         <BoardLink
           key={board.id}
           id={board.id}
-          photo={board.photo}
+          cover={board.cover}
           usersAvatars={board.users.map((value) => value.avatar_url)}
-          name={board.name}
+          name={board.title}
         />
       ))}
     </>

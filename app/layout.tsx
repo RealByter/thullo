@@ -2,7 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import "./globals.css";
 import { cookies } from "next/headers";
 import { Noto_Sans } from "next/font/google";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/navbar/NavBar";
 import { SkeletonTheme } from "react-loading-skeleton";
 import ReactQueryProvider from "./ReactQueryProvider";
 

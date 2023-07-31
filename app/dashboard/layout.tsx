@@ -1,4 +1,4 @@
-import CreateBoard from "@/components/CreateBoard";
+import CreateBoard from "@/components/dashboard/CreateBoard";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

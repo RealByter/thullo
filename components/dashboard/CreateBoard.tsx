@@ -2,20 +2,49 @@
 
 import { Dialog } from "@headlessui/react";
 import { useState } from "react";
-import Button from "./Button";
+import Button from "../Button";
 import Image from "next/image";
 import { LuGlobe2, LuLock } from "react-icons/lu";
 import ImageSearch from "./ImageSearch";
-import IconButton from "./IconButton";
-import Input from "./Input";
+import Input from "../Input";
+import IconButton from "../IconButton";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
+const defaultCover =
+  "https://images.unsplash.com/photo-1588421357574-87938a86fa28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
 
 export default function CreateBoard() {
   const [isOpen, setIsOpen] = useState(false);
   const [visibility, setVisibility] = useState<"public" | "private">("public");
   const [title, setTitle] = useState("");
-  const [cover, setCover] = useState(
-    "https://images.unsplash.com/photo-1588421357574-87938a86fa28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-  );
+  const [cover, setCover] = useState(defaultCover);
+  const supabase = createClientComponentClient();
+
+  function resetInputs() {
+    setTitle("");
+    setVisibility("public");
+    setCover(defaultCover);
+    setIsOpen(false);
+  }
+
+  async function createBoard() {
+    const { error: bError, data } = await supabase
+      .from("boards")
+      .insert({ cover, title, visibility })
+      .select("id");
+    if (bError) throw bError;
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { error: mError } = await supabase
+      .from("members")
+      .insert({ user_id: user?.id, board_id: data[0].id });
+    if (mError) throw mError;
+
+    resetInputs();
+  }
 
   return (
     <>
@@ -55,6 +84,18 @@ export default function CreateBoard() {
               >
                 {visibility === "public" ? "Public" : "Private"}
               </IconButton>
+            </div>
+            <div className="flex justify-end gap-3">
+              <Button variant="transparent" onClick={resetInputs}>
+                Cancel
+              </Button>
+              <Button
+                variant="blue"
+                disabled={title.length === 0}
+                onClick={createBoard}
+              >
+                + Create
+              </Button>
             </div>
           </Dialog.Panel>
         </div>
