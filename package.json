@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "update-types": "npx supabase gen types typescript --project-id ycsdjxgaamfwhznkwfwr --schema public > ./types/supabase.ts"
   },
   "dependencies": {
     "@headlessui/react": "^0.0.0-insiders.ac859fe",
