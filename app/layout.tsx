@@ -32,7 +32,7 @@ export default async function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body>
+      <body className="flex h-screen w-screen flex-col">
         <ReactQueryProvider>
           <SkeletonTheme baseColor="#eee" highlightColor="#ddd">
             {user && (
@@ -40,7 +40,9 @@ export default async function RootLayout({
                 <NavBar />
               </header>
             )}
-            <main className="mx-auto mt-10">{children}</main>
+            <main className="mx-auto mt-8 w-screen grow overflow-hidden">
+              {children}
+            </main>
           </SkeletonTheme>
         </ReactQueryProvider>
       </body>
