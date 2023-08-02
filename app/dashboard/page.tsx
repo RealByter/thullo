@@ -19,7 +19,7 @@ export default async function Index() {
   //   .single();
   const { data: boardsData, error } = await supabase
     .from("boards")
-    .select("id, title, cover, created_at, users (id, avatar_url)");
+    .select("id, title, cover, created_at, users!members (id, avatar_url)");
 
   if (error) throw error;
 

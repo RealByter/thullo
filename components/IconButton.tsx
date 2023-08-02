@@ -19,7 +19,7 @@ export default function IconButton({
   return (
     <button
       {...props}
-      className={`flex grow items-center gap-3 text-left rounded-lg border border-transparent px-4 py-2 text-xs font-medium outline-none hover:border-gray-500 focus-visible:ring-4 focus-visible:ring-gray-300 ${
+      className={`flex grow items-center gap-3 rounded-lg border border-transparent px-4 py-2 text-left text-xs font-medium outline-none hover:border-gray-500 focus-visible:ring-4 focus-visible:ring-gray-300 ${
         active ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-500"
       }`}
     >
