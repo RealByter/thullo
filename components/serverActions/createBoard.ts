@@ -15,15 +15,15 @@ export default async function createBoard({
 }) {
   const supabase = createServerActionClient({ cookies });
 
-  const { error: bError, data } = await supabase
-    .from("boards")
-    .insert({ cover, title, visibility })
-    .select("id");
-  if (bError) throw bError;
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  const { error: bError, data } = await supabase
+    .from("boards")
+    .insert({ cover, title, visibility, made_by: user?.id })
+    .select("id");
+  if (bError) throw bError;
 
   const { error: mError } = await supabase
     .from("members")
