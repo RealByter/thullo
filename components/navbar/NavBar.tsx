@@ -12,7 +12,7 @@ export default async function NavBar() {
 
   const { data, error, status } = await supabase
     .from("users")
-    .select("full_name, avatar_url")
+    .select("full_name, avatar_url, username")
     .eq("id", user?.id)
     .single();
 
@@ -42,7 +42,11 @@ export default async function NavBar() {
           />
         </svg>
       </Link>
-      <LogoutDropdown avatar_url={data.avatar_url} full_name={data.full_name} />
+      <LogoutDropdown
+        avatar_url={data.avatar_url}
+        full_name={data.full_name}
+        username={data.username}
+      />
     </nav>
   );
 }

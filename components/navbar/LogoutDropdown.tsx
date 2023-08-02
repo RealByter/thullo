@@ -9,9 +9,11 @@ import { MdArrowDropDown, MdAccountCircle, MdLogout } from "react-icons/md";
 export default function LogoutDropdown({
   avatar_url,
   full_name,
+  username,
 }: {
   avatar_url: string;
-  full_name: string;
+  full_name?: string;
+  username?:string;
 }) {
   const router = useRouter();
 
@@ -20,7 +22,7 @@ export default function LogoutDropdown({
       method: "POST",
     });
 
-    router.refresh()
+    router.refresh();
   }
 
   return (
@@ -35,21 +37,24 @@ export default function LogoutDropdown({
             className="rounded-lg"
           />
           <span className="hidden text-xs font-bold text-gray-800 lg:inline">
-            {full_name}
+            {full_name || username}
           </span>
           <MdArrowDropDown className="h-6 w-6" />
         </Menu.Button>
         <Menu.Items className="absolute right-0 top-12 flex w-40 flex-col gap-2 rounded-xl border bg-white p-2 shadow-main outline-none">
           <Menu.Item>
-            <MenuButton>
+            <button className="flex h-10 items-center gap-4 rounded-lg p-2 text-sm text-gray-600 hover:bg-gray-100 ui-active:bg-gray-100">
               <MdAccountCircle className="h-6 w-6" /> My Profile
-            </MenuButton>
+            </button>
           </Menu.Item>
           <div className="w-full border-t" />
           <Menu.Item>
-            <MenuButton red={true} onClick={signOut}>
+            <button
+              onClick={signOut}
+              className="flex h-10 items-center gap-4 rounded-lg p-2 text-sm text-red-500 hover:bg-red-100 ui-active:bg-red-100"
+            >
               <MdLogout className="h-6 w-6" /> Logout
-            </MenuButton>
+            </button>
           </Menu.Item>
         </Menu.Items>
       </Menu>
@@ -61,7 +66,7 @@ const MenuButton = (
   props: DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
-  > & { red?: boolean | undefined; },
+  > & { red?: boolean | undefined },
 ) => {
   const colorClasses = props.red
     ? "text-red-500 hover:bg-red-100 ui-active:bg-red-100"
@@ -73,4 +78,4 @@ const MenuButton = (
       className={`flex h-10 items-center gap-4 rounded-lg p-2 text-sm ${colorClasses}`}
     ></button>
   );
-}
+};
