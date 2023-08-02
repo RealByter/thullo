@@ -12,18 +12,25 @@ export default async function Index() {
 
   if (!user) redirect("/login");
 
-  const { data, error } = await supabase
-    .from("users")
-    .select("id, boards (id, title, cover, created_at, users (avatar_url))")
-    .eq("id", user.id)
-    .single();
+  // const { data, error } = await supabase
+  //   .from("users")
+  //   .select("id, boards (id, title, cover, created_at, users (avatar_url))")
+  //   .eq("id", user.id)
+  //   .single();
+  const { data: boardsData, error } = await supabase
+    .from("boards")
+    .select("id, title, cover, created_at, users (id, avatar_url)");
 
   if (error) throw error;
 
+  const data = boardsData?.filter((board) =>
+    board.users.find((u) => (u.id = user.id)),
+  );
+
   return (
     <>
-      {data?.boards
-        .sort((a, b) => {
+      {data
+        ?.sort((a, b) => {
           const aTime = new Date(a.created_at).getTime();
           const bTime = new Date(b.created_at).getTime();
           if (aTime < bTime) return -1;
